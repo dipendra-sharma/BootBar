@@ -1,0 +1,10 @@
+.DS_Store
+xcuserdata/
+*.xcuserstate
+.build/
+.swiftpm/
+DerivedData/
+build/
+firebase-debug.log
+docs/superpowers/
+.claude/

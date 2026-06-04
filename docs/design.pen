@@ -1,0 +1,2465 @@
+{
+  "version": "2.13",
+  "children": [
+    {
+      "type": "frame",
+      "id": "NORd3",
+      "x": 0,
+      "y": 0,
+      "name": "Menu Panel - Light",
+      "clip": true,
+      "width": 340,
+      "fill": "$bg",
+      "cornerRadius": 12,
+      "stroke": "$border",
+      "strokeWidth": 1,
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#00000026",
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "blur": 24
+      },
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "VVUOq",
+          "name": "Header",
+          "width": "fill_container",
+          "padding": [
+            12,
+            14
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "TA5K4",
+              "name": "Title Group",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "u7AaS",
+                  "name": "App Icon",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "smartphone",
+                  "library": "lucide",
+                  "fill": "$fg"
+                },
+                {
+                  "type": "text",
+                  "id": "ZqVUC",
+                  "name": "Title",
+                  "fill": "$fg",
+                  "content": "Simulator Manager",
+                  "fontFamily": "$font",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "icon",
+              "id": "uTwg0",
+              "name": "Refresh",
+              "width": 14,
+              "height": 14,
+              "icon": "refresh-cw",
+              "library": "lucide",
+              "fill": "$muted"
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "w3NQtx",
+          "name": "Divider Top",
+          "fill": "$border",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "gePjs",
+          "name": "Content",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            12,
+            10
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "z87sxN",
+              "name": "iOS Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "GgS8q",
+                  "name": "iOS Section Header",
+                  "width": "fill_container",
+                  "padding": [
+                    0,
+                    6
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "T0IUv",
+                      "name": "iOS Label",
+                      "fill": "$muted",
+                      "content": "IOS SIMULATORS",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "oQfwx",
+                      "name": "iOS Count",
+                      "fill": "$muted",
+                      "content": "1 of 4 running",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M0iOa8",
+                  "name": "iOS Device Group",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$row",
+                  "cornerRadius": 8,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "u7lbjd",
+                      "name": "Row iPhone 16 Pro",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "TURsY",
+                          "name": "State Dot",
+                          "fill": "$running",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "IcdEH",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "myu1o",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPhone 16 Pro",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "BO61X",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iOS 18.5 - Booted",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "EMsnu",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "m8uzQU",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "square",
+                              "library": "lucide",
+                              "fill": "$danger"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wwzON",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "jkgKw",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "tD7js",
+                      "name": "Row Divider 1",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w7e6N",
+                      "name": "Row iPhone 16",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "s5wsh3",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "nXLCp",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "cG0e9",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPhone 16",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "b0PvN2",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iOS 18.5 - Shutdown",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ybe40",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "Ci7XL",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "m3oAE",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "VlCx9",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "WI8Bz",
+                      "name": "Row Divider 2",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KBEai",
+                      "name": "Row iPhone SE (3rd gen)",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "VGCuC",
+                          "name": "State Dot",
+                          "fill": "$booting",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n4XSY",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "fItqj",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPhone SE (3rd gen)",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "QrxNf",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iOS 17.5 - Booting...",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Vys5N",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "yUkrS",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "loader",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "jGiAi",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "pj2Bj",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "tS4gj",
+                      "name": "Row Divider 3",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "TFnIi",
+                      "name": "Row iPad Pro 13-inch (M4)",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "YyJF1",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "E3zyTQ",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "DLSbC",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPad Pro 13-inch (M4)",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "nxMJp",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iPadOS 18.5 - Shutdown",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "H3hk6",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "f5V18",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "R6tdOh",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "z9N0YZ",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "y6ZaeT",
+              "name": "Android Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "b7jpy",
+                  "name": "Android Section Header",
+                  "width": "fill_container",
+                  "padding": [
+                    0,
+                    6
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AboAm",
+                      "name": "Android Label",
+                      "fill": "$muted",
+                      "content": "ANDROID EMULATORS",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "HhCcw",
+                      "name": "Android Count",
+                      "fill": "$muted",
+                      "content": "1 of 3 running",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OF6Fi",
+                  "name": "Android Device Group",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$row",
+                  "cornerRadius": 8,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "X6neI8",
+                      "name": "Row Pixel_9_Pro",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "bAXWB",
+                          "name": "State Dot",
+                          "fill": "$running",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "vucZX",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "kUTZ6",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "Pixel_9_Pro",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "bYeDc",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "Android 15 - API 35 - Running",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "vuoml",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "mU21v",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "square",
+                              "library": "lucide",
+                              "fill": "$danger"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "P13qa",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "WvtHR",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "x4IGv",
+                      "name": "Row Divider A1",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "QJZ8l",
+                      "name": "Row Pixel_8",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "wu1Mh",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yfZps",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u9EDlz",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "Pixel_8",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "W6oSr",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "Android 14 - API 34 - Stopped",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "BXcDW",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "pTvmx",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "PYvRW",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "fanXC",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "rkgrB",
+                      "name": "Row Divider A2",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "O6F3U",
+                      "name": "Row Pixel_Tablet",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "i9YLa",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "AvZGI",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "puAlo",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "Pixel_Tablet",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "D7QWDt",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "Android 14 - API 34 - Stopped",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yRoHO",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "Vn4Ts",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "BmZDy",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "jdz22",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "aVYcV",
+          "name": "Divider Bottom",
+          "fill": "$border",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "lMznL",
+          "name": "Footer",
+          "width": "fill_container",
+          "padding": [
+            10,
+            14
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "GSlcC",
+              "name": "Settings Group",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "SLjle",
+                  "name": "Gear",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "settings",
+                  "library": "lucide",
+                  "fill": "$muted"
+                },
+                {
+                  "type": "text",
+                  "id": "BbfIf",
+                  "name": "Settings Label",
+                  "fill": "$muted",
+                  "content": "Settings",
+                  "fontFamily": "$font",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "L648b",
+              "name": "Quit Group",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "SgOt9",
+                  "name": "Power",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "power",
+                  "library": "lucide",
+                  "fill": "$muted"
+                },
+                {
+                  "type": "text",
+                  "id": "ZzU4t",
+                  "name": "Quit Label",
+                  "fill": "$muted",
+                  "content": "Quit",
+                  "fontFamily": "$font",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Z513o3",
+      "x": 420,
+      "y": 0,
+      "name": "Menu Panel - Dark",
+      "theme": {
+        "mode": "dark"
+      },
+      "clip": true,
+      "width": 340,
+      "fill": "$bg",
+      "cornerRadius": 12,
+      "stroke": "$border",
+      "strokeWidth": 1,
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#00000026",
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "blur": 24
+      },
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "sW8BL",
+          "name": "Header",
+          "width": "fill_container",
+          "padding": [
+            12,
+            14
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "K742J",
+              "name": "Title Group",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "F2Tz8",
+                  "name": "App Icon",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "smartphone",
+                  "library": "lucide",
+                  "fill": "$fg"
+                },
+                {
+                  "type": "text",
+                  "id": "Y8ZJsQ",
+                  "name": "Title",
+                  "fill": "$fg",
+                  "content": "Simulator Manager",
+                  "fontFamily": "$font",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "icon",
+              "id": "Tftm6",
+              "name": "Refresh",
+              "width": 14,
+              "height": 14,
+              "icon": "refresh-cw",
+              "library": "lucide",
+              "fill": "$muted"
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "SOVh8",
+          "name": "Divider Top",
+          "fill": "$border",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "jB7Eb",
+          "name": "Content",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            12,
+            10
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "t4LkUr",
+              "name": "iOS Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "g8De17",
+                  "name": "iOS Section Header",
+                  "width": "fill_container",
+                  "padding": [
+                    0,
+                    6
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NXbyg",
+                      "name": "iOS Label",
+                      "fill": "$muted",
+                      "content": "IOS SIMULATORS",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "OE2ZJ",
+                      "name": "iOS Count",
+                      "fill": "$muted",
+                      "content": "1 of 4 running",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "a0qljp",
+                  "name": "iOS Device Group",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$row",
+                  "cornerRadius": 8,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SNelC",
+                      "name": "Row iPhone 16 Pro",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "eWUfW",
+                          "name": "State Dot",
+                          "fill": "$running",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DUzpy",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "aoiMB",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPhone 16 Pro",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "nI51p",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iOS 18.5 - Booted",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DmpO4",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "bnwVj",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "square",
+                              "library": "lucide",
+                              "fill": "$danger"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "KPmVO",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "r4fRix",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "v3THwk",
+                      "name": "Row Divider 1",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gsiRS",
+                      "name": "Row iPhone 16",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "z1uMc9",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CWesj",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uWnCh",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPhone 16",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "K5p0c",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iOS 18.5 - Shutdown",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "jRwe3",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "pZu01",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "S6lCH",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "R2m0U",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "llyWB",
+                      "name": "Row Divider 2",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "akNl5",
+                      "name": "Row iPhone SE (3rd gen)",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "X3GhfN",
+                          "name": "State Dot",
+                          "fill": "$booting",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "S8itFh",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RxGHK",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPhone SE (3rd gen)",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "RQPCa",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iOS 17.5 - Booting...",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "teR0H",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "Orm67",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "loader",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Q6lXk",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "VpnXI",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "PQv6R",
+                      "name": "Row Divider 3",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "QQoTU",
+                      "name": "Row iPad Pro 13-inch (M4)",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "y2b4B",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "EBucW",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "h8aEIF",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "iPad Pro 13-inch (M4)",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "pEaHV",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "iPadOS 18.5 - Shutdown",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wO6I8",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "ew9PJ",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "z6xZL0",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "fZ7s7",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zp3U3",
+              "name": "Android Section",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YUy1o",
+                  "name": "Android Section Header",
+                  "width": "fill_container",
+                  "padding": [
+                    0,
+                    6
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ihyRh",
+                      "name": "Android Label",
+                      "fill": "$muted",
+                      "content": "ANDROID EMULATORS",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 0.5
+                    },
+                    {
+                      "type": "text",
+                      "id": "sOpRA",
+                      "name": "Android Count",
+                      "fill": "$muted",
+                      "content": "1 of 3 running",
+                      "fontFamily": "$font",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "w5HMI",
+                  "name": "Android Device Group",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$row",
+                  "cornerRadius": 8,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "h91u9",
+                      "name": "Row Pixel_9_Pro",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "FN3uY",
+                          "name": "State Dot",
+                          "fill": "$running",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "t4hvB",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "LLE5H",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "Pixel_9_Pro",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "N5Q2X",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "Android 15 - API 35 - Running",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Kjgxi",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "KhckI",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "square",
+                              "library": "lucide",
+                              "fill": "$danger"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "H1MoU",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "j7WNLx",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "b1T50",
+                      "name": "Row Divider A1",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "oz2uK",
+                      "name": "Row Pixel_8",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "C438lv",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "w9O2of",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VmZ3J",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "Pixel_8",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "tSLkZ",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "Android 14 - API 34 - Stopped",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "FSV6X",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "idC4Y",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "WqCg4",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "h85wD",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "qjygC",
+                      "name": "Row Divider A2",
+                      "fill": "$border",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JasTv",
+                      "name": "Row Pixel_Tablet",
+                      "width": "fill_container",
+                      "gap": 9,
+                      "padding": [
+                        9,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "wfxp6",
+                          "name": "State Dot",
+                          "fill": "$stopped",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "x4SRS",
+                          "name": "Info",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 2,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "e22C5",
+                              "name": "Name",
+                              "fill": "$fg",
+                              "content": "Pixel_Tablet",
+                              "fontFamily": "$font",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Q74ry8",
+                              "name": "OS",
+                              "fill": "$muted",
+                              "content": "Android 14 - API 34 - Stopped",
+                              "fontFamily": "$font",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xHRll",
+                          "name": "Action",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "VT27s",
+                              "name": "Action Icon",
+                              "width": 13,
+                              "height": 13,
+                              "icon": "play",
+                              "library": "lucide",
+                              "fill": "$accent"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xZtw3",
+                          "name": "More",
+                          "width": 24,
+                          "height": 24,
+                          "cornerRadius": 6,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "WCbtl",
+                              "name": "More Icon",
+                              "width": 14,
+                              "height": 14,
+                              "icon": "ellipsis",
+                              "library": "lucide",
+                              "fill": "$muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "FLdMQ",
+          "name": "Divider Bottom",
+          "fill": "$border",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "IDvHH",
+          "name": "Footer",
+          "width": "fill_container",
+          "padding": [
+            10,
+            14
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Q3vF7U",
+              "name": "Settings Group",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "R8Qwje",
+                  "name": "Gear",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "settings",
+                  "library": "lucide",
+                  "fill": "$muted"
+                },
+                {
+                  "type": "text",
+                  "id": "mSF1a",
+                  "name": "Settings Label",
+                  "fill": "$muted",
+                  "content": "Settings",
+                  "fontFamily": "$font",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "DtND1",
+              "name": "Quit Group",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "xCSi2",
+                  "name": "Power",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "power",
+                  "library": "lucide",
+                  "fill": "$muted"
+                },
+                {
+                  "type": "text",
+                  "id": "CHKjA",
+                  "name": "Quit Label",
+                  "fill": "$muted",
+                  "content": "Quit",
+                  "fontFamily": "$font",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "A0Aps",
+      "x": 840,
+      "y": 0,
+      "name": "Settings Window - Light",
+      "clip": true,
+      "width": 460,
+      "fill": "$bg",
+      "cornerRadius": 10,
+      "stroke": "$border",
+      "strokeWidth": 1,
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#00000026",
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "blur": 24
+      },
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "SCVBv",
+          "name": "Titlebar",
+          "width": "fill_container",
+          "gap": 8,
+          "padding": [
+            12,
+            14
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Kgyiu",
+              "name": "Traffic Lights",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "k9QWb",
+                  "name": "Close",
+                  "fill": "#FF5F57",
+                  "width": 12,
+                  "height": 12
+                },
+                {
+                  "type": "ellipse",
+                  "id": "L2nYw",
+                  "name": "Min",
+                  "fill": "#FEBC2E",
+                  "width": 12,
+                  "height": 12
+                },
+                {
+                  "type": "ellipse",
+                  "id": "imfCU",
+                  "name": "Max",
+                  "fill": "#28C840",
+                  "width": 12,
+                  "height": 12
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GF6U3",
+              "name": "Title Wrap",
+              "width": "fill_container",
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "B6lWn",
+                  "name": "Window Title",
+                  "fill": "$fg",
+                  "content": "Settings",
+                  "fontFamily": "$font",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "M4cKV",
+              "name": "Right Spacer",
+              "width": 52,
+              "height": 12
+            }
+          ]
+        },
+        {
+          "type": "rectangle",
+          "id": "hEFU2",
+          "name": "TB Divider",
+          "fill": "$border",
+          "width": "fill_container",
+          "height": 1
+        },
+        {
+          "type": "frame",
+          "id": "vlpej",
+          "name": "Settings Body",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 20,
+          "children": [
+            {
+              "type": "frame",
+              "id": "t6pSgv",
+              "name": "SDK Field",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "zW1ng",
+                  "name": "SDK Label",
+                  "fill": "$fg",
+                  "content": "Android SDK Path",
+                  "fontFamily": "$font",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "VgkAs",
+                  "name": "Input Row",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "zfyEi",
+                      "name": "Path Input",
+                      "width": "fill_container",
+                      "fill": "$row",
+                      "cornerRadius": 6,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "gap": 8,
+                      "padding": [
+                        8,
+                        10
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "i8Hbq",
+                          "name": "Folder",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "folder",
+                          "library": "lucide",
+                          "fill": "$muted"
+                        },
+                        {
+                          "type": "text",
+                          "id": "L44P86",
+                          "name": "Path Value",
+                          "fill": "$fg",
+                          "content": "/Users/dipendra/Library/Android/sdk",
+                          "fontFamily": "$font",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JiTX2",
+                      "name": "Browse Button",
+                      "fill": "$row",
+                      "cornerRadius": 6,
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "padding": [
+                        8,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "d5M5C",
+                          "name": "Browse Label",
+                          "fill": "$fg",
+                          "content": "Browse...",
+                          "fontFamily": "$font",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "IaHmf",
+                  "name": "SDK Hint",
+                  "fill": "$muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Leave empty to auto-detect from $ANDROID_HOME, $ANDROID_SDK_ROOT, or ~/Library/Android/sdk.",
+                  "lineHeight": 1.45,
+                  "fontFamily": "$font",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "iI9DU",
+              "name": "Status Row",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "s1cZ1",
+                  "name": "Check",
+                  "width": 13,
+                  "height": 13,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$running"
+                },
+                {
+                  "type": "text",
+                  "id": "ICSud",
+                  "name": "Status Text",
+                  "fill": "$muted",
+                  "content": "SDK found - emulator and adb detected",
+                  "fontFamily": "$font",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "themes": {
+    "mode": [
+      "light",
+      "dark"
+    ]
+  },
+  "variables": {
+    "accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#0A7AFF",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#409CFF",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "bg": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#F2F2F4",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#222226",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "booting": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#E8930C",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#FBBF24",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "border": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#E3E3E8",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#3A3A3F",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "danger": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#D93025",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#F87171",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "fg": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#1D1D1F",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#F2F2F4",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "font": {
+      "type": "string",
+      "value": "Inter"
+    },
+    "muted": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#6E6E73",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#9A9AA0",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "row": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#FFFFFF",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#2C2C30",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "running": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#28A745",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#4ADE80",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    },
+    "stopped": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#AEAEB5",
+          "theme": {
+            "mode": "light"
+          }
+        },
+        {
+          "value": "#5A5A60",
+          "theme": {
+            "mode": "dark"
+          }
+        }
+      ]
+    }
+  }
+}

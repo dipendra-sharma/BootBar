@@ -1,0 +1,40 @@
+name: Bug report
+description: Report a problem with BootBar
+labels: ["bug", "triage"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Steps to reproduce, expected vs actual behavior.
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: BootBar version
+    validations:
+      required: true
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS version
+    validations:
+      required: true
+  - type: input
+    id: toolchains
+    attributes:
+      label: Xcode / Android SDK versions
+      placeholder: Xcode 26.5, Android SDK at ~/Library/Android/sdk
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      render: shell
+  - type: checkboxes
+    id: coc
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

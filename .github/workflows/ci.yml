@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v5
+      - name: Swift version
+        run: swift --version
+      - name: Package tests
+        run: swift test --package-path BootBarCore
+      - name: Build app
+        run: xcodebuild -project BootBar.xcodeproj -scheme BootBar -destination 'platform=macOS,arch=arm64' build
