@@ -1,9 +1,17 @@
 import SwiftUI
+import AppKit
+import Combine
 import BootBarCore
 
 struct MenuBarPanelView: View {
     @Environment(DeviceListViewModel.self) private var viewModel
     @Environment(\.openSettings) private var openSettings
+    @Environment(\.scenePhase) private var scenePhase
+
+    private let appLaunched = NSWorkspace.shared.notificationCenter
+        .publisher(for: NSWorkspace.didLaunchApplicationNotification)
+    private let appTerminated = NSWorkspace.shared.notificationCenter
+        .publisher(for: NSWorkspace.didTerminateApplicationNotification)
 
     var body: some View {
         VStack(spacing: 0) {
@@ -14,6 +22,11 @@ struct MenuBarPanelView: View {
             footer
         }
         .task { await autoRefresh() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { Task { await viewModel.refresh() } }
+        }
+        .onReceive(appLaunched) { refreshIfDeviceHost($0) }
+        .onReceive(appTerminated) { refreshIfDeviceHost($0) }
     }
 
     private var header: some View {
@@ -88,5 +101,19 @@ struct MenuBarPanelView: View {
             await viewModel.refresh()
             try? await Task.sleep(for: .seconds(5))
         }
+    }
+
+    private func refreshIfDeviceHost(_ notification: Notification) {
+        guard isDeviceHost(notification) else { return }
+        Task { await viewModel.refresh() }
+    }
+
+    private func isDeviceHost(_ notification: Notification) -> Bool {
+        guard let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
+            return false
+        }
+        if app.bundleIdentifier == "com.apple.iphonesimulator" { return true }
+        let executable = app.executableURL?.lastPathComponent ?? app.localizedName ?? ""
+        return executable.contains("qemu") || executable.contains("emulator")
     }
 }

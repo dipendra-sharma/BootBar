@@ -2,9 +2,10 @@ import Testing
 @testable import BootBarCore
 
 @MainActor
-private func makeViewModel(sdkRoot: String? = "/sdk") -> (DeviceListViewModel, MockShellRunner) {
+private func makeViewModel(sdkRoot: String? = "/sdk",
+                           bootTimeout: Duration = .seconds(60)) -> (DeviceListViewModel, MockShellRunner) {
     let runner = MockShellRunner()
-    let vm = DeviceListViewModel(runner: runner) {
+    let vm = DeviceListViewModel(runner: runner, bootTimeout: bootTimeout) {
         sdkRoot.map(AndroidSDK.init(root:))
     }
     return (vm, runner)
@@ -159,6 +160,65 @@ private func emptyAndroid(_ runner: MockShellRunner) {
 
     await staleRefresh.value
     #expect(vm.iosDevices.first?.state == .stopped)
+}
+
+@MainActor
+@Test func bootingRevertsToRealStateAfterTimeout() async {
+    let (vm, runner) = makeViewModel(bootTimeout: .milliseconds(20))
+    emptySimctl(runner)
+    runner.responses["/sdk/emulator/emulator -list-avds"] = .success("Pixel_8\n")
+    runner.responses["/sdk/platform-tools/adb devices"] = .success("List of devices attached\n")
+    let device = Device(id: "Pixel_8", name: "Pixel_8", platform: .android,
+                        osVersion: "API 34", state: .stopped)
+    await vm.perform(.start, on: device)
+    #expect(vm.androidDevices.first?.state == .booting)
+    try? await Task.sleep(for: .milliseconds(40))
+    await vm.refresh()
+    #expect(vm.androidDevices.first?.state == .stopped)
+}
+
+@MainActor
+@Test func concurrentStartsMarkAllDevicesBooting() async {
+    let (vm, runner) = makeViewModel()
+    emptySimctl(runner)
+    runner.responses["/sdk/emulator/emulator -list-avds"] = .success("Pixel_8\nPixel_9\n")
+    runner.responses["/sdk/platform-tools/adb devices"] = .success("List of devices attached\n")
+    let pixel8 = Device(id: "Pixel_8", name: "Pixel_8", platform: .android, osVersion: "API 34", state: .stopped)
+    let pixel9 = Device(id: "Pixel_9", name: "Pixel_9", platform: .android, osVersion: "API 34", state: .stopped)
+    async let a: Void = vm.perform(.start, on: pixel8)
+    async let b: Void = vm.perform(.start, on: pixel9)
+    _ = await (a, b)
+    #expect(vm.androidDevices.count == 2)
+    #expect(vm.androidDevices.allSatisfy { $0.state == .booting })
+}
+
+@MainActor
+@Test func mixedPlatformStartsMarkBothBooting() async {
+    let (vm, runner) = makeViewModel()
+    runner.responses["/usr/bin/xcrun simctl list devices --json"] = .success(
+        #"{"devices":{"com.apple.CoreSimulator.SimRuntime.iOS-18-5":[{"udid":"A","name":"iPhone 16","state":"Shutdown","isAvailable":true}]}}"#)
+    runner.responses["/sdk/emulator/emulator -list-avds"] = .success("Pixel_8\n")
+    runner.responses["/sdk/platform-tools/adb devices"] = .success("List of devices attached\n")
+    let sim = Device(id: "A", name: "iPhone 16", platform: .ios, osVersion: "iOS 18.5", state: .stopped)
+    let avd = Device(id: "Pixel_8", name: "Pixel_8", platform: .android, osVersion: "API 34", state: .stopped)
+    async let a: Void = vm.perform(.start, on: sim)
+    async let b: Void = vm.perform(.start, on: avd)
+    _ = await (a, b)
+    #expect(vm.iosDevices.first?.state == .booting)
+    #expect(vm.androidDevices.first?.state == .booting)
+}
+
+@MainActor
+@Test func externalLaunchShowsRunningWithoutPriorAction() async {
+    let (vm, runner) = makeViewModel()
+    emptySimctl(runner)
+    runner.responses["/sdk/emulator/emulator -list-avds"] = .success("Pixel_8\n")
+    runner.responses["/sdk/platform-tools/adb devices"] =
+        .success("List of devices attached\nemulator-5554\tdevice\n")
+    runner.responses["/sdk/platform-tools/adb -s emulator-5554 emu avd name"] = .success("Pixel_8\nOK\n")
+    await vm.refresh()
+    #expect(vm.androidDevices.first?.state == .running)
+    #expect(vm.androidDevices.first?.serial == "emulator-5554")
 }
 
 @MainActor

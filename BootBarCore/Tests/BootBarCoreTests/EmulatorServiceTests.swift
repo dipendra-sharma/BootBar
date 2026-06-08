@@ -28,6 +28,17 @@ private func setupListResponses(_ runner: MockShellRunner) {
     #expect(pixel8?.serial == nil)
 }
 
+@Test func listMarksOfflineEmulatorAsBooting() async throws {
+    let (service, runner) = makeService()
+    runner.responses["/sdk/emulator/emulator -list-avds"] = .success("Pixel_8\n")
+    runner.responses["/sdk/platform-tools/adb devices"] =
+        .success("List of devices attached\nemulator-5554\toffline\n")
+    runner.responses["/sdk/platform-tools/adb -s emulator-5554 emu avd name"] = .success("Pixel_8\r\nOK\r\n")
+    let devices = try await service.listDevices()
+    #expect(devices.first?.state == .booting)
+    #expect(devices.first?.serial == "emulator-5554")
+}
+
 @Test func listReadsApiLevelFromConfig() async throws {
     let (service, runner) = makeService()
     setupListResponses(runner)

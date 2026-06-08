@@ -7,11 +7,20 @@ public enum AvdParser {
             .filter { !$0.isEmpty && !$0.contains(" | ") }
     }
 
-    public static func parseEmulatorSerials(_ output: String) -> [String] {
+    public struct EmulatorDevice: Sendable, Equatable {
+        public let serial: String
+        public let online: Bool
+    }
+
+    public static func parseEmulatorDevices(_ output: String) -> [EmulatorDevice] {
         output.split(whereSeparator: \.isNewline)
             .map { $0.split(separator: "\t").map { $0.trimmingCharacters(in: .whitespaces) } }
-            .filter { $0.count == 2 && $0[0].hasPrefix("emulator-") && $0[1] == "device" }
-            .map { $0[0] }
+            .filter { $0.count == 2 && $0[0].hasPrefix("emulator-") }
+            .map { EmulatorDevice(serial: $0[0], online: $0[1] == "device") }
+    }
+
+    public static func parseEmulatorSerials(_ output: String) -> [String] {
+        parseEmulatorDevices(output).filter(\.online).map(\.serial)
     }
 
     public static func parseConsoleAvdName(_ output: String) -> String? {

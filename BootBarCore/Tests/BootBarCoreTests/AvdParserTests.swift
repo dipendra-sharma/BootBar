@@ -22,6 +22,20 @@ import Testing
     #expect(AvdParser.parseEmulatorSerials(output) == ["emulator-5554"])
 }
 
+@Test func parsesEmulatorDevicesWithOnlineState() {
+    let output = """
+    List of devices attached
+    emulator-5554\tdevice
+    emulator-5556\toffline
+    R5CT123ABC\tdevice
+
+    """
+    #expect(AvdParser.parseEmulatorDevices(output) == [
+        .init(serial: "emulator-5554", online: true),
+        .init(serial: "emulator-5556", online: false)
+    ])
+}
+
 @Test func parsesApiLevelFromConfigIni() {
     let ini = """
     avd.ini.encoding=UTF-8

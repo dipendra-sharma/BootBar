@@ -4,23 +4,27 @@ public struct EmulatorService: Sendable {
     private let runner: any ShellRunner
     private let sdk: AndroidSDK
     private let avdHome: String
+    private let consoleTimeout: Duration
     private let readFile: @Sendable (String) -> String?
 
     public init(runner: any ShellRunner, sdk: AndroidSDK,
                 avdHome: String = NSHomeDirectory() + "/.android/avd",
+                consoleTimeout: Duration = .seconds(3),
                 readFile: @escaping @Sendable (String) -> String? = { try? String(contentsOfFile: $0, encoding: .utf8) }) {
         self.runner = runner
         self.sdk = sdk
         self.avdHome = avdHome
+        self.consoleTimeout = consoleTimeout
         self.readFile = readFile
     }
 
     public func listDevices() async throws -> [Device] {
         let names = AvdParser.parseAvdNames(try await runner.run(sdk.emulatorPath, ["-list-avds"]))
-        let running = try await runningAvds()
+        let present = try await presentAvds()
         return names.map { name in
-            Device(id: name, name: name, platform: .android, osVersion: osVersion(for: name),
-                   state: running[name] != nil ? .running : .stopped, serial: running[name])
+            let info = present[name]
+            return Device(id: name, name: name, platform: .android, osVersion: osVersion(for: name),
+                          state: state(for: info), serial: info?.serial)
         }
     }
 
@@ -48,16 +52,37 @@ public struct EmulatorService: Sendable {
         try await Task.sleep(for: .seconds(2))
     }
 
-    private func runningAvds() async throws -> [String: String] {
-        let serials = AvdParser.parseEmulatorSerials(try await runner.run(sdk.adbPath, ["devices"]))
-        var map: [String: String] = [:]
-        for serial in serials {
-            let output = try? await runner.run(sdk.adbPath, ["-s", serial, "emu", "avd", "name"])
-            if let output, let name = AvdParser.parseConsoleAvdName(output) {
-                map[name] = serial
+    private func state(for info: (serial: String, online: Bool)?) -> DeviceState {
+        guard let info else { return .stopped }
+        return info.online ? .running : .booting
+    }
+
+    private func presentAvds() async throws -> [String: (serial: String, online: Bool)] {
+        let entries = AvdParser.parseEmulatorDevices(try await runner.run(sdk.adbPath, ["devices"]))
+        let resolved = await withTaskGroup(of: (serial: String, online: Bool, name: String?).self) { group in
+            for entry in entries {
+                group.addTask { (entry.serial, entry.online, await consoleAvdName(for: entry.serial)) }
             }
+            return await group.reduce(into: []) { $0.append($1) }
         }
-        return map
+        return resolved.reduce(into: [:]) { map, entry in
+            if let name = entry.name { map[name] = (entry.serial, entry.online) }
+        }
+    }
+
+    private func consoleAvdName(for serial: String) async -> String? {
+        await withTaskGroup(of: String?.self) { group in
+            group.addTask {
+                let output = try? await runner.run(sdk.adbPath, ["-s", serial, "emu", "avd", "name"])
+                return output.flatMap(AvdParser.parseConsoleAvdName)
+            }
+            group.addTask {
+                try? await Task.sleep(for: consoleTimeout)
+                return nil
+            }
+            defer { group.cancelAll() }
+            return await group.next() ?? nil
+        }
     }
 
     private func osVersion(for name: String) -> String {
