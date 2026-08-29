@@ -92,6 +92,31 @@ private func emptyAndroid(_ runner: MockShellRunner) {
 }
 
 @MainActor
+@Test func stoppingEmulatorWithoutSerialReportsAReadableError() async {
+    let (vm, runner) = makeViewModel()
+    emptySimctl(runner)
+    emptyAndroid(runner)
+    let device = Device(id: "Pixel_8", name: "Pixel_8", platform: .android,
+                        osVersion: "API 34", state: .stopped)
+    await vm.perform(.stop, on: device)
+    #expect(vm.rowErrors["Pixel_8"] == "Pixel_8 is not running")
+    #expect(!runner.commands.contains { $0.contains("-s  emu kill") })
+}
+
+@MainActor
+@Test func concurrentRefreshesNeverOverlap() async {
+    let (vm, runner) = makeViewModel()
+    emptySimctl(runner)
+    emptyAndroid(runner)
+    runner.delays["/sdk/platform-tools/adb devices"] = .milliseconds(60)
+    async let first: Void = vm.refresh()
+    async let second: Void = vm.refresh()
+    async let third: Void = vm.refresh()
+    _ = await (first, second, third)
+    #expect(runner.maxConcurrency(of: "/sdk/platform-tools/adb devices") == 1)
+}
+
+@MainActor
 @Test func startMarksDeviceBootingUntilRunning() async {
     let (vm, runner) = makeViewModel()
     emptySimctl(runner)

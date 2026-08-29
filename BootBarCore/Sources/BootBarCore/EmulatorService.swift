@@ -5,16 +5,25 @@ public struct EmulatorService: Sendable {
     private let sdk: AndroidSDK
     private let avdHome: String
     private let consoleTimeout: Duration
+    private let shutdownTimeout: Duration
+    private let shutdownPollInterval: Duration
+    private let launchFailureWindow: Duration
     private let readFile: @Sendable (String) -> String?
 
     public init(runner: any ShellRunner, sdk: AndroidSDK,
                 avdHome: String = NSHomeDirectory() + "/.android/avd",
                 consoleTimeout: Duration = .seconds(3),
+                shutdownTimeout: Duration = .seconds(30),
+                shutdownPollInterval: Duration = .milliseconds(500),
+                launchFailureWindow: Duration = .seconds(2),
                 readFile: @escaping @Sendable (String) -> String? = { try? String(contentsOfFile: $0, encoding: .utf8) }) {
         self.runner = runner
         self.sdk = sdk
         self.avdHome = avdHome
         self.consoleTimeout = consoleTimeout
+        self.shutdownTimeout = shutdownTimeout
+        self.shutdownPollInterval = shutdownPollInterval
+        self.launchFailureWindow = launchFailureWindow
         self.readFile = readFile
     }
 
@@ -28,8 +37,9 @@ public struct EmulatorService: Sendable {
         }
     }
 
-    public func start(_ name: String, extraArguments: [String] = []) throws {
-        try runner.launchDetached(sdk.emulatorPath, ["-avd", name] + extraArguments)
+    public func start(_ name: String, extraArguments: [String] = []) async throws {
+        try await runner.launchDetached(sdk.emulatorPath, ["-avd", name] + extraArguments,
+                                        failureWindow: launchFailureWindow)
     }
 
     public func stop(serial: String) async throws {
@@ -38,18 +48,34 @@ public struct EmulatorService: Sendable {
 
     public func coldBoot(_ device: Device) async throws {
         try await killIfRunning(device)
-        try start(device.name, extraArguments: ["-no-snapshot-load"])
+        try await start(device.name, extraArguments: ["-no-snapshot-load"])
     }
 
     public func wipe(_ device: Device) async throws {
         try await killIfRunning(device)
-        try start(device.name, extraArguments: ["-wipe-data"])
+        try await start(device.name, extraArguments: ["-wipe-data"])
     }
 
     private func killIfRunning(_ device: Device) async throws {
         guard let serial = device.serial else { return }
         try await stop(serial: serial)
-        try await Task.sleep(for: .seconds(2))
+        try await waitUntilDetached(serial: serial)
+    }
+
+    private func waitUntilDetached(serial: String) async throws {
+        let deadline = ContinuousClock.now + shutdownTimeout
+        while ContinuousClock.now < deadline {
+            guard try await isAttached(serial) else { return }
+            try await Task.sleep(for: shutdownPollInterval)
+        }
+        throw ShellError(command: "\(sdk.adbPath) -s \(serial) emu kill",
+                         exitCode: 1,
+                         stderr: "Emulator did not shut down in time — try again in a moment")
+    }
+
+    private func isAttached(_ serial: String) async throws -> Bool {
+        AvdParser.parseEmulatorDevices(try await runner.run(sdk.adbPath, ["devices"]))
+            .contains { $0.serial == serial }
     }
 
     private func state(for info: (serial: String, online: Bool)?) -> DeviceState {

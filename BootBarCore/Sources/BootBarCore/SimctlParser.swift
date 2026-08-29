@@ -22,6 +22,11 @@ public enum SimctlParser {
             .sorted { $0.name < $1.name }
     }
 
+    public static func hasBootedDevices(json: String) throws -> Bool {
+        let list = try JSONDecoder().decode(SimctlDeviceList.self, from: Data(json.utf8))
+        return list.devices.values.contains { !$0.isEmpty }
+    }
+
     private static func device(from raw: SimctlDevice, runtime: String) -> Device {
         Device(id: raw.udid, name: raw.name, platform: .ios,
                osVersion: osVersion(fromRuntime: runtime), state: state(from: raw.state))

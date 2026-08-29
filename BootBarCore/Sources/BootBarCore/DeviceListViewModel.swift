@@ -17,7 +17,7 @@ public final class DeviceListViewModel {
     private let bootTimeout: Duration
     private let now: @Sendable () -> ContinuousClock.Instant
     private var bootDeadlines: [String: ContinuousClock.Instant] = [:]
-    private var refreshGeneration = 0
+    private var refreshChain: Task<Void, Never>?
 
     public init(runner: any ShellRunner = ProcessShellRunner(),
                 bootTimeout: Duration = .seconds(60),
@@ -31,13 +31,21 @@ public final class DeviceListViewModel {
     }
 
     public func refresh() async {
-        refreshGeneration += 1
-        let generation = refreshGeneration
+        let previous = refreshChain
+        let task = Task { @MainActor in
+            await previous?.value
+            await self.reload()
+        }
+        refreshChain = task
+        await task.value
+        if refreshChain == task { refreshChain = nil }
+    }
+
+    private func reload() async {
         async let ios = loadIOS()
         async let android = loadAndroid()
         let iosResult = await ios
         let androidResult = await android
-        guard generation == refreshGeneration else { return }
         pruneBootDeadlines(presentIds: Set(iosResult.0.map(\.id)).union(androidResult.0.map(\.id)))
         (iosDevices, iosError) = (overlayBooting(iosResult.0), iosResult.1)
         (androidDevices, androidError) = (overlayBooting(androidResult.0), androidResult.1)
@@ -100,11 +108,19 @@ public final class DeviceListViewModel {
             throw ShellError(command: "android", exitCode: 1, stderr: "Android SDK not found")
         }
         switch action {
-        case .start: try service.start(device.name)
-        case .stop: try await service.stop(serial: device.serial ?? "")
+        case .start: try await service.start(device.name)
+        case .stop: try await service.stop(serial: try serial(of: device))
         case .coldBoot: try await service.coldBoot(device)
         case .erase: try await service.wipe(device)
         }
+    }
+
+    private func serial(of device: Device) throws -> String {
+        guard let serial = device.serial else {
+            throw ShellError(command: "adb emu kill", exitCode: 1,
+                             stderr: "\(device.name) is not running")
+        }
+        return serial
     }
 
     private func expectsBoot(_ action: DeviceAction, _ device: Device) -> Bool {

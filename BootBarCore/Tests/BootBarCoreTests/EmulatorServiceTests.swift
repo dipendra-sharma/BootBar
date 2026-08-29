@@ -53,10 +53,20 @@ private func setupListResponses(_ runner: MockShellRunner) {
     #expect(devices.first?.osVersion == "Android")
 }
 
-@Test func startLaunchesDetachedEmulator() throws {
+@Test func startLaunchesDetachedEmulator() async throws {
     let (service, runner) = makeService()
-    try service.start("Pixel_8")
+    try await service.start("Pixel_8")
     #expect(runner.commands == ["detached /sdk/emulator/emulator -avd Pixel_8"])
+}
+
+@Test func startSurfacesLaunchFailure() async {
+    let (service, runner) = makeService()
+    runner.responses["detached /sdk/emulator/emulator -avd Pixel_8"] =
+        .failure(ShellError(command: "emulator", exitCode: 1,
+                            stderr: "Running multiple emulators with the same AVD"))
+    await #expect(throws: ShellError.self) {
+        try await service.start("Pixel_8")
+    }
 }
 
 @Test func stopKillsViaAdb() async throws {
@@ -65,15 +75,54 @@ private func setupListResponses(_ runner: MockShellRunner) {
     #expect(runner.commands == ["/sdk/platform-tools/adb -s emulator-5554 emu kill"])
 }
 
+private func makeRunningDevice() -> Device {
+    Device(id: "Pixel_9_Pro", name: "Pixel_9_Pro", platform: .android,
+           osVersion: "API 35", state: .running, serial: "emulator-5554")
+}
+
+private func makeWaitingService(_ runner: MockShellRunner, shutdownTimeout: Duration) -> EmulatorService {
+    EmulatorService(runner: runner, sdk: AndroidSDK(root: "/sdk"), avdHome: "/avd",
+                    shutdownTimeout: shutdownTimeout,
+                    shutdownPollInterval: .milliseconds(20)) { _ in nil }
+}
+
 @Test func coldBootRunningDeviceKillsThenStartsWithNoSnapshot() async throws {
     let (service, runner) = makeService()
-    let device = Device(id: "Pixel_9_Pro", name: "Pixel_9_Pro", platform: .android,
-                        osVersion: "API 35", state: .running, serial: "emulator-5554")
-    try await service.coldBoot(device)
+    try await service.coldBoot(makeRunningDevice())
     #expect(runner.commands == [
         "/sdk/platform-tools/adb -s emulator-5554 emu kill",
+        "/sdk/platform-tools/adb devices",
         "detached /sdk/emulator/emulator -avd Pixel_9_Pro -no-snapshot-load"
     ])
+}
+
+@Test func coldBootWaitsForEmulatorToDetachBeforeRelaunching() async throws {
+    let runner = MockShellRunner()
+    let service = makeWaitingService(runner, shutdownTimeout: .seconds(5))
+    runner.responses["/sdk/platform-tools/adb devices"] =
+        .success("List of devices attached\nemulator-5554\tdevice\n")
+
+    let detach = Task {
+        try? await Task.sleep(for: .milliseconds(100))
+        runner.responses["/sdk/platform-tools/adb devices"] = .success("List of devices attached\n")
+    }
+    try await service.coldBoot(makeRunningDevice())
+    await detach.value
+
+    let polls = runner.commands.filter { $0 == "/sdk/platform-tools/adb devices" }.count
+    #expect(polls > 1)
+    #expect(runner.commands.last == "detached /sdk/emulator/emulator -avd Pixel_9_Pro -no-snapshot-load")
+}
+
+@Test func coldBootFailsLoudlyRatherThanRelaunchingOverLiveEmulator() async {
+    let runner = MockShellRunner()
+    let service = makeWaitingService(runner, shutdownTimeout: .milliseconds(100))
+    runner.responses["/sdk/platform-tools/adb devices"] =
+        .success("List of devices attached\nemulator-5554\tdevice\n")
+    await #expect(throws: ShellError.self) {
+        try await service.coldBoot(makeRunningDevice())
+    }
+    #expect(!runner.commands.contains { $0.hasPrefix("detached ") })
 }
 
 @Test func wipeStoppedDeviceStartsWithWipeData() async throws {

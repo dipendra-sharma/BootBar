@@ -11,15 +11,15 @@ import Testing
     #expect(AvdParser.parseAvdNames(output) == ["Pixel_9_Pro", "Pixel_8"])
 }
 
-@Test func parsesOnlineAdbSerials() {
+@Test func ignoresEmulatorDiagnosticLines() {
     let output = """
-    List of devices attached
-    emulator-5554\tdevice
-    emulator-5556\toffline
-    R5CT123ABC\tdevice
+    INFO | Storing crashdata in: /tmp/x
+    WARNING: encryption is off
+    ERROR   | No AVD specified.
+    Pixel_9_Pro
 
     """
-    #expect(AvdParser.parseEmulatorSerials(output) == ["emulator-5554"])
+    #expect(AvdParser.parseAvdNames(output) == ["Pixel_9_Pro"])
 }
 
 @Test func parsesEmulatorDevicesWithOnlineState() {
@@ -46,6 +46,19 @@ import Testing
 
 @Test func apiLevelNilWhenMissing() {
     #expect(AvdParser.parseApiLevel(configIni: "foo=bar") == nil)
+}
+
+@Test func parsesApiLevelFromTargetKey() {
+    #expect(AvdParser.parseApiLevel(configIni: "target=android-37.1") == "37")
+}
+
+@Test func apiLevelIgnoresUnrelatedKeysThatLookLikeApiLevels() {
+    let ini = """
+    AvdId=android-30_test_device
+    hw.device.name=android-24
+    image.sysdir.1=system-images/android-35/google_apis/arm64-v8a/
+    """
+    #expect(AvdParser.parseApiLevel(configIni: ini) == "35")
 }
 
 @Test func parsesConsoleAvdNameWithCRLF() {

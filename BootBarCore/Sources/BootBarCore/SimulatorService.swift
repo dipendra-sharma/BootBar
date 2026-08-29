@@ -1,3 +1,5 @@
+import Foundation
+
 public struct SimulatorService: Sendable {
     private let runner: any ShellRunner
     private let xcrun = "/usr/bin/xcrun"
@@ -12,8 +14,8 @@ public struct SimulatorService: Sendable {
     }
 
     public func boot(_ udid: String) async throws {
-        try await runner.run(xcrun, ["simctl", "boot", udid])
-        try await runner.run("/usr/bin/open", ["-a", "Simulator"])
+        try await run(["simctl", "boot", udid], acceptingStateOf: udid) { $0 != .stopped }
+        await openSimulatorApp()
     }
 
     public func shutdown(_ udid: String) async throws {
@@ -22,14 +24,14 @@ public struct SimulatorService: Sendable {
     }
 
     public func coldBoot(_ device: Device) async throws {
-        if device.state == .running {
+        if device.state != .stopped {
             try await shutdownDevice(device.id)
         }
         try await boot(device.id)
     }
 
     public func erase(_ device: Device) async throws {
-        if device.state == .running {
+        if device.state != .stopped {
             try await shutdownDevice(device.id)
         }
         try await runner.run(xcrun, ["simctl", "erase", device.id])
@@ -37,12 +39,37 @@ public struct SimulatorService: Sendable {
     }
 
     private func shutdownDevice(_ udid: String) async throws {
-        try await runner.run(xcrun, ["simctl", "shutdown", udid])
+        try await run(["simctl", "shutdown", udid], acceptingStateOf: udid) { $0 == .stopped }
+    }
+
+    private func run(_ arguments: [String], acceptingStateOf udid: String,
+                     when isAcceptable: (DeviceState) -> Bool) async throws {
+        do {
+            try await runner.run(xcrun, arguments)
+        } catch let error as ShellError {
+            guard let state = await currentState(of: udid), isAcceptable(state) else { throw error }
+        }
+    }
+
+    private func currentState(of udid: String) async -> DeviceState? {
+        (try? await listDevices())?.first { $0.id == udid }?.state
+    }
+
+    private func openSimulatorApp() async {
+        guard let path = try? await simulatorAppPath() else { return }
+        _ = try? await runner.run("/usr/bin/open", ["-a", path])
+    }
+
+    private func simulatorAppPath() async throws -> String {
+        let developerDirectory = try await runner.run("/usr/bin/xcode-select", ["-p"])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return developerDirectory + "/Applications/Simulator.app"
     }
 
     private func quitSimulatorAppIfIdle() async {
-        guard let devices = try? await listDevices(),
-              devices.allSatisfy({ $0.state == .stopped }) else { return }
-        try? await runner.run("/usr/bin/pkill", ["-x", "Simulator"])
+        guard let json = try? await runner.run(xcrun, ["simctl", "list", "devices", "booted", "--json"]),
+              let anyBooted = try? SimctlParser.hasBootedDevices(json: json),
+              !anyBooted else { return }
+        _ = try? await runner.run("/usr/bin/pkill", ["-x", "Simulator"])
     }
 }
