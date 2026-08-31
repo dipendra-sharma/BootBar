@@ -77,7 +77,8 @@ private func bootingDevice() -> Device {
     #expect(runner.commands == [
         "/usr/bin/xcrun simctl shutdown UDID-1",
         bootedList,
-        "/usr/bin/pkill -x Simulator"
+        "/usr/bin/pkill -x Simulator",
+        "/usr/bin/pkill -x DeviceHub"
     ])
 }
 
@@ -127,7 +128,8 @@ private func bootingDevice() -> Device {
         "/usr/bin/xcrun simctl shutdown UDID-1",
         "/usr/bin/xcrun simctl erase UDID-1",
         bootedList,
-        "/usr/bin/pkill -x Simulator"
+        "/usr/bin/pkill -x Simulator",
+        "/usr/bin/pkill -x DeviceHub"
     ])
 }
 
