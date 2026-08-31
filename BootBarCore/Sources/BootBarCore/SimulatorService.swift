@@ -63,6 +63,9 @@ public struct SimulatorService: Sendable {
     private func simulatorAppPath() async throws -> String {
         let developerDirectory = try await runner.run("/usr/bin/xcode-select", ["-p"])
             .trimmingCharacters(in: .whitespacesAndNewlines)
+        let deviceHub = (developerDirectory as NSString).deletingLastPathComponent
+            + "/Applications/DeviceHub.app"
+        if FileManager.default.fileExists(atPath: deviceHub) { return deviceHub }
         return developerDirectory + "/Applications/Simulator.app"
     }
 
@@ -71,5 +74,6 @@ public struct SimulatorService: Sendable {
               let anyBooted = try? SimctlParser.hasBootedDevices(json: json),
               !anyBooted else { return }
         _ = try? await runner.run("/usr/bin/pkill", ["-x", "Simulator"])
+        _ = try? await runner.run("/usr/bin/pkill", ["-x", "DeviceHub"])
     }
 }
