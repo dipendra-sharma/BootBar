@@ -8,10 +8,13 @@ struct BootBarApp: App {
     }
 
     var body: some Scene {
-        MenuBarExtra("BootBar", systemImage: "iphone.gen3") {
+        MenuBarExtra {
             MenuBarPanelView()
                 .environment(viewModel)
                 .frame(width: 340, height: 560)
+        } label: {
+            Image(nsImage: MenuBarIcon.image(count: viewModel.runningCount))
+                .task { viewModel.startWatchingDevices() }
         }
         .menuBarExtraStyle(.window)
 

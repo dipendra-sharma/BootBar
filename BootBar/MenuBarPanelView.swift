@@ -97,10 +97,7 @@ struct MenuBarPanelView: View {
     }
 
     private func autoRefresh() async {
-        while !Task.isCancelled {
-            await viewModel.refresh()
-            try? await Task.sleep(for: .seconds(5))
-        }
+        await viewModel.refresh()
     }
 
     private func refreshIfDeviceHost(_ notification: Notification) {
