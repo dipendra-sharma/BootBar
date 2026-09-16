@@ -2,10 +2,16 @@ import Foundation
 
 public struct SimulatorService: Sendable {
     private let runner: any ShellRunner
+    private let hostLocator: SimulatorHostLocator
+    private let terminateHosts: @Sendable (Set<String>) -> Void
     private let xcrun = "/usr/bin/xcrun"
 
-    public init(runner: any ShellRunner) {
+    public init(runner: any ShellRunner,
+                hostLocator: SimulatorHostLocator = SimulatorHostLocator(),
+                terminateHosts: @escaping @Sendable (Set<String>) -> Void = SimulatorHost.terminateRunning) {
         self.runner = runner
+        self.hostLocator = hostLocator
+        self.terminateHosts = terminateHosts
     }
 
     public func listDevices() async throws -> [Device] {
@@ -56,20 +62,20 @@ public struct SimulatorService: Sendable {
     }
 
     private func openSimulatorApp() async {
-        guard let path = try? await simulatorAppPath() else { return }
-        _ = try? await runner.run("/usr/bin/open", ["-a", path])
+        guard let host = await simulatorHost() else { return }
+        _ = try? await runner.run("/usr/bin/open", ["-a", host.bundlePath])
     }
 
-    private func simulatorAppPath() async throws -> String {
-        let developerDirectory = try await runner.run("/usr/bin/xcode-select", ["-p"])
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        return developerDirectory + "/Applications/Simulator.app"
+    private func simulatorHost() async -> SimulatorHost? {
+        guard let developerDirectory = try? await runner.run("/usr/bin/xcode-select", ["-p"])
+            .trimmingCharacters(in: .whitespacesAndNewlines) else { return nil }
+        return hostLocator.locate(developerDirectory: developerDirectory)
     }
 
     private func quitSimulatorAppIfIdle() async {
         guard let json = try? await runner.run(xcrun, ["simctl", "list", "devices", "booted", "--json"]),
               let anyBooted = try? SimctlParser.hasBootedDevices(json: json),
               !anyBooted else { return }
-        _ = try? await runner.run("/usr/bin/pkill", ["-x", "Simulator"])
+        terminateHosts(SimulatorHost.bundleIdentifiers)
     }
 }

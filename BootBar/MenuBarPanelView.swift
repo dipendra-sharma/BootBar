@@ -112,7 +112,8 @@ struct MenuBarPanelView: View {
         guard let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
             return false
         }
-        if app.bundleIdentifier == "com.apple.iphonesimulator" { return true }
+        if let bundleIdentifier = app.bundleIdentifier,
+           SimulatorHost.bundleIdentifiers.contains(bundleIdentifier) { return true }
         let executable = app.executableURL?.lastPathComponent ?? app.localizedName ?? ""
         return executable.contains("qemu") || executable.contains("emulator")
     }

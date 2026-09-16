@@ -19,10 +19,10 @@ No Electron, no daemons, no telemetry. A single lightweight panel driving `simct
 
 ## Features
 
-- 🍎 **iOS Simulators** — list available devices with runtime version, boot (opens Simulator.app), shutdown, cold boot, erase content and settings
+- 🍎 **iOS Simulators** — list available devices with runtime version, boot (opens Simulator.app, or Device Hub on Xcode 27+), shutdown, cold boot, erase content and settings
 - 🤖 **Android Emulators** — list AVDs with API level, start, stop, cold boot (`-no-snapshot-load`), wipe data (`-wipe-data`)
 - 🟢 **Live state tracking** — running / booting / stopped indicators refresh automatically while the panel is open
-- 🧹 **Tidy by design** — quits Simulator.app automatically when the last simulator stops, so no orphan dock icons
+- 🧹 **Tidy by design** — quits the simulator host app automatically when the last simulator stops, so no orphan dock icons
 - 🔍 **Android SDK auto-detection** — finds your SDK via `$ANDROID_HOME`, `$ANDROID_SDK_ROOT`, or the default install path, with a manual override in Settings
 - 🪶 **Native and lightweight** — pure SwiftUI `MenuBarExtra`, zero third-party dependencies, no dock icon
 
@@ -66,7 +66,7 @@ Pre-built releases and a Homebrew cask are planned — watch the [Releases](http
 
 | Action | iOS | Android |
 | --- | --- | --- |
-| Start | `simctl boot` + opens Simulator.app | `emulator -avd` |
+| Start | `simctl boot` + opens the simulator host app | `emulator -avd` |
 | Stop | `simctl shutdown` | `adb emu kill` |
 | Cold Boot | shutdown → boot | restart with `-no-snapshot-load` |
 | Erase / Wipe | `simctl erase` | restart with `-wipe-data` |
