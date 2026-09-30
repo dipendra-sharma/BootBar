@@ -18,6 +18,12 @@ public final class DeviceListViewModel {
     private let now: @Sendable () -> ContinuousClock.Instant
     private var bootDeadlines: [String: ContinuousClock.Instant] = [:]
     private var refreshChain: Task<Void, Never>?
+    private let watchers = [
+        DeviceDirectoryWatcher(rootPath: DeviceDirectoryWatcher.coreSimulatorDevices),
+        DeviceDirectoryWatcher(rootPath: DeviceDirectoryWatcher.androidAVDs)
+    ]
+    private var isWatching = false
+    private var settleTask: Task<Void, Never>?
 
     public init(runner: any ShellRunner = ProcessShellRunner(),
                 bootTimeout: Duration = .seconds(60),
@@ -28,6 +34,31 @@ public final class DeviceListViewModel {
         self.bootTimeout = bootTimeout
         self.now = now
         self.locateSDK = locateSDK
+    }
+
+    public var runningCount: Int {
+        (iosDevices + androidDevices).count { $0.state == .running }
+    }
+
+    public func startWatchingDevices() {
+        guard !isWatching else { return }
+        isWatching = true
+        Task { @MainActor in await refresh() }
+        for watcher in watchers {
+            watcher.start { [weak self] in
+                Task { @MainActor in await self?.refresh() }
+            }
+        }
+    }
+
+    private func scheduleSettleRefreshIfBooting() {
+        settleTask?.cancel()
+        guard (androidDevices + iosDevices).contains(where: { $0.state == .booting }) else { return }
+        settleTask = Task { @MainActor in
+            try? await Task.sleep(for: .seconds(2))
+            guard !Task.isCancelled else { return }
+            await refresh()
+        }
     }
 
     public func refresh() async {
@@ -49,6 +80,7 @@ public final class DeviceListViewModel {
         pruneBootDeadlines(presentIds: Set(iosResult.0.map(\.id)).union(androidResult.0.map(\.id)))
         (iosDevices, iosError) = (overlayBooting(iosResult.0), iosResult.1)
         (androidDevices, androidError) = (overlayBooting(androidResult.0), androidResult.1)
+        scheduleSettleRefreshIfBooting()
     }
 
     public func perform(_ action: DeviceAction, on device: Device) async {
